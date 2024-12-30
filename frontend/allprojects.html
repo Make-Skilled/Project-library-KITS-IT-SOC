@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .dashboard-container {
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: fixed;
+            transition: all 0.3s ease;
+        }
+
+        .main-content {
+            transition: all 0.3s ease;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card {
+            border-left: 4px solid #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container flex">
+        <!-- Sidebar -->
+        <aside class="sidebar w-64 p-6 text-white">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold">KITS Dashboard</h2>
+            </div>
+            <nav>
+                <ul class="space-y-4">
+                    <li><a href="admindashboards.html" class="flex items-center space-x-2 p-2 rounded hover:bg-white/10">
+                        <span>Dashboard</span>
+                    </a></li>
+                    <li><a href="/admin/projects" class="flex items-center space-x-2 p-2 rounded hover:bg-white/10">
+                        <span>Projects</span>
+                    </a></li>
+                    <!-- <li><a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-white/10">
+                        <span>Courses</span>
+                    </a></li>
+                    <li><a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-white/10">
+                        <span>Profile</span>
+                    </a></li>
+                    <li><a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-white/10">
+                        <span>Settings</span>
+                    </a></li> -->
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content flex-1 ml-64 p-8">
+            <!-- Header -->
+            <header class="flex justify-between items-center mb-8">
+                <h1 class="text-2xl font-bold">All Projects</h1>
+                <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                    Logout
+                </button>
+            </header>
+
+            <!-- Projects List -->
+            <div class="space-y-6">
+                <!-- This will be dynamically filled with project data -->
+                <div id="projects-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Project cards will go here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>document.addEventListener('DOMContentLoaded', async function() {
+        try {
+            const response = await fetch('http://localhost:3000/projects');
+            const data = await response.json();
+    
+            console.log(data);  // Add this line to inspect the response
+    
+            if (data.success) {
+                const projectsContainer = document.getElementById('projects-list');
+                projectsContainer.innerHTML = ''; // Clear previous content
+    
+                data.projects.forEach(project => {
+                    const projectCard = document.createElement('div');
+                    projectCard.classList.add('border', 'p-4', 'rounded', 'shadow', 'bg-white');
+                    
+                    // Ensure the file path is relative, not absolute
+                    const relativeFilePath = project.projectFile.replace(/^.*[\\\/]uploads[\\\/]/, '/uploads/');
+   
+                    projectCard.innerHTML = `
+                        <h3 class="font-semibold text-lg">${project.projectName}</h3>
+                        <p><strong>Passed Out Year:</strong> ${project.passedOutYear}</p>
+                        <p><strong>Guide:</strong> ${project.projectGuide.name}, ${project.projectGuide.degree}</p>
+                        <p><strong>Team Members:</strong></p>
+                        <ul class="list-disc pl-5">
+                            ${project.teamMembers.map(member => `
+                                <li>${member.name} (Reg No: ${member.registerNo})</li>
+                            `).join('')}
+                        </ul>
+                        <a href="http://localhost:3000/uploads/${project.projectFile}" class="text-blue-500 hover:underline mt-4 block">View Project File</a>
+                    `;
+
+                    
+                    projectsContainer.appendChild(projectCard);
+                });
+            } else {
+                alert('Error fetching projects');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to load projects');
+        }
+    });
+   
+    
+
+    </script>
+</body>
+</html>

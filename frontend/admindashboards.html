@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .dashboard-container {
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: fixed;
+            transition: all 0.3s ease;
+        }
+
+        .main-content {
+            transition: all 0.3s ease;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .project-card {
+            border-left: 4px solid #667eea;
+        }
+
+        .activity-item {
+            border-left: 2px solid #e2e8f0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .activity-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container flex">
+        <!-- Sidebar -->
+        <aside class="sidebar w-64 p-6 text-white">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold">KITS Dashboard</h2>
+            </div>
+            <nav>
+                <ul class="space-y-4">
+                    <li><a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-white/10">
+                        <span>Dashboard</span>
+                    </a></li>
+                    <li><a href="allprojects.html" class="flex items-center space-x-2 p-2 rounded hover:bg-white/10">
+                        <span>Projects</span>
+                    </a></li>
+                    <!-- <li><a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-white/10">
+                        <span>Courses</span>
+                    </a></li>
+                    <li><a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-white/10">
+                        <span>Profile</span>
+                    </a></li>
+                    <li><a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-white/10">
+                        <span>Settings</span>
+                    </a></li> -->
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content flex-1 ml-64 p-8">
+            <!-- Header -->
+            <header class="flex justify-between items-center mb-8">
+                <h1 class="text-2xl font-bold">Welcome, Admin!</h1>
+                <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                    Logout
+                </button>
+            </header>
+
+            <!-- Add Project Form -->
+            <div class="card p-6 mb-8">
+                <h2 class="text-xl font-bold mb-4">Add New Project</h2>
+                <form id="addProjectForm" enctype="multipart/form-data">
+                    <div class="space-y-4">
+                        <div>
+                            <label for="projectName" class="block text-sm font-medium">Project Name</label>
+                            <input type="text" name="projectName" id="projectName" class="mt-1 p-2 w-full border rounded" required>
+                        </div>
+                        <div>
+                            <label for="passedOutYear" class="block text-sm font-medium">Passed Out Year</label>
+                            <input type="number" name="passedOutYear" id="passedOutYear" class="mt-1 p-2 w-full border rounded" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium">Team Members</label>
+                            <div class="space-y-2">
+                                <div>
+                                    <input type="text" name="teamMember1Name" placeholder="Team Member 1 Name" class="mt-1 p-2 w-full border rounded" required>
+                                    <input type="text" name="teamMember1RegNo" placeholder="Team Member 1 Registration Number" class="mt-1 p-2 w-full border rounded" required>
+                                </div>
+                                <div>
+                                    <input type="text" name="teamMember2Name" placeholder="Team Member 2 Name" class="mt-1 p-2 w-full border rounded">
+                                    <input type="text" name="teamMember2RegNo" placeholder="Team Member 2 Registration Number" class="mt-1 p-2 w-full border rounded">
+                                </div>
+                                <div>
+                                    <input type="text" name="teamMember3Name" placeholder="Team Member 3 Name" class="mt-1 p-2 w-full border rounded">
+                                    <input type="text" name="teamMember3RegNo" placeholder="Team Member 3 Registration Number" class="mt-1 p-2 w-full border rounded">
+                                </div>
+                                <div>
+                                    <input type="text" name="teamMember4Name" placeholder="Team Member 4 Name" class="mt-1 p-2 w-full border rounded">
+                                    <input type="text" name="teamMember4RegNo" placeholder="Team Member 4 Registration Number" class="mt-1 p-2 w-full border rounded">
+                                </div>
+                                <div>
+                                    <input type="text" name="teamMember5Name" placeholder="Team Member 5 Name" class="mt-1 p-2 w-full border rounded">
+                                    <input type="text" name="teamMember5RegNo" placeholder="Team Member 5 Registration Number" class="mt-1 p-2 w-full border rounded">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="projectGuideName" class="block text-sm font-medium">Project Guide Name</label>
+                            <input type="text" name="projectGuideName" id="projectGuideName" class="mt-1 p-2 w-full border rounded" required>
+                        </div>
+                        <div>
+                            <label for="projectGuideDegree" class="block text-sm font-medium">Project Guide Degree</label>
+                            <input type="text" name="projectGuideDegree" id="projectGuideDegree" class="mt-1 p-2 w-full border rounded" required>
+                        </div>
+
+                        <div>
+                            <label for="projectFile" class="block text-sm font-medium">Upload Project File (PDF)</label>
+                            <input type="file" name="projectFile" id="projectFile" accept="application/pdf" class="mt-1 p-2 w-full border rounded" required>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Add Project</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Logout function
+        function logout() {
+            window.location.href = '/login'; // Redirect to login page
+        }
+
+        // Check if user is logged in (no token logic here)
+        document.addEventListener('DOMContentLoaded', function() {
+            // If necessary, you could check for user authentication status via another method
+        });
+
+        // Add project form submission
+        document.getElementById('addProjectForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+
+            try {
+                const response = await fetch('http://localhost:3000/admin/projects', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Project added successfully!');
+                    // Optionally redirect to another page or clear the form
+                    document.getElementById('addProjectForm').reset();
+                } else {
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error adding project:', error);
+                alert('Error adding project.');
+            }
+        });
+    </script>
+</body>
+</html>

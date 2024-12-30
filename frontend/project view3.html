@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        #courses {
+            background-image: url('bg3.jpg'); /* Replace 'bg3.jpg' with your image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white; /* Adjust text color for readability */
+            min-height: 100vh; /* Ensure it covers the full height of the viewport */
+            width: 100%;
+        }
+
+        .card-img-top {
+            width: 100%; /* Ensures the image fills the card's width */
+            height: 200px; /* Sets a fixed height for all images */
+            object-fit: cover; /* Ensures the image retains its aspect ratio while filling the dimensions */
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent card background */
+            border: none; /* Optional: Remove card borders for a cleaner look */
+        }
+
+        .card-body {
+            padding-top: 15px; /* Adds spacing between the image and content */
+        }
+
+        .card-body .btn {
+            margin: 5px; /* Space between buttons */
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card-body .btn-primary {
+            background-color: #006d77; /* Primary color for buttons */
+            border: none;
+        }
+
+        .card-body .btn-primary:hover {
+            background-color: #004c48; /* Darker teal on hover */
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-body .btn-secondary {
+            background-color: #dfe7ec; /* Secondary color for buttons */
+            border: none;
+        }
+
+        .card-body .btn-secondary:hover {
+            background-color: #006d77; /* Primary color on hover */
+            color: #fff;
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            color: #006d77; /* Primary color for the heading */
+            margin-bottom: 20px;
+        }
+
+        h5.card-title {
+            color: #006d77; /* Primary color for project titles */
+        }
+
+        a {
+            text-decoration: none;
+            color: #006d77; /* Matching primary link color */
+        }
+
+        a:hover {
+            color: #004c48; /* Darker teal link hover color */
+        }
+
+        /* Layout adjustments for a better grid */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .col-md-4 {
+            margin-bottom: 20px; /* Ensures uniform space between the cards */
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            width: 100%; /* Ensure the card takes up full column width */
+        }
+    </style>
+</head>
+<body>
+    <section id="courses" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">2018-2019 Projects</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="img4.jpg" class="card-img-top" alt="Project 2k22">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Project Title 1</h5> <!-- You can update the title -->
+                            <a href="#" class="btn btn-primary">Project Details</a>
+                            <a href="#" class="btn btn-secondary" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="img2.jpg" class="card-img-top" alt="Project 2k23">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Project Title 2</h5> <!-- You can update the title -->
+                            <a href="#" class="btn btn-primary">Project Details</a>
+                            <a href="project2k23.pdf" class="btn btn-secondary" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="img8.jpg" class="card-img-top" alt="Project 2k24">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Project Title 3</h5> <!-- You can update the title -->
+                            <a href="#" class="btn btn-primary">Project Details</a>
+                            <a href="project2k24.pdf" class="btn btn-secondary" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

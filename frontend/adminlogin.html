@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Authentication</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .auth-container {
+            background: linear-gradient(135deg, #006d77 0%, #004d47 100%); /* Green gradient */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #006d77; /* Focus border with green */
+            box-shadow: 0 0 0 3px rgba(0, 109, 119, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .input-label {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 0 5px;
+            color: #718096;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .input-field:focus + .input-label,
+        .input-field:not(:placeholder-shown) + .input-label {
+            top: 0;
+            font-size: 0.875rem;
+            color: #006d77; /* Focused label color */
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #1e3a8a 0%, #004d47 100%); /* Dark green to blue gradient */
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 109, 119, 0.2);
+        }
+
+        .admin-badge {
+            background: linear-gradient(135deg, #006d77 0%, #004d47 100%); /* Green gradient */
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container p-4">
+        <div class="form-container w-full max-w-md p-8 animate-slide-in">
+            <div class="text-center mb-6">
+                <span class="admin-badge">Admin Portal</span>
+                <h2 class="text-3xl font-bold text-gray-800">Administrator Login</h2>
+                <p class="text-gray-600 mt-2">Access the admin dashboard</p>
+            </div>
+
+            <form onsubmit="return handleAdminLogin(event)">
+                <div class="input-group">
+                    <input type="text" id="adminUsername" class="input-field" placeholder=" " required>
+                    <label for="adminUsername" class="input-label">Username</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="adminPassword" class="input-field" placeholder=" " required>
+                    <label for="adminPassword" class="input-label">Password</label>
+                </div>
+                <div class="flex items-center justify-between mb-6">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-900">
+                        <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                    </label>
+                    <a href="#" class="text-sm text-blue-900 hover:underline">Forgot Password?</a>
+                </div>
+                <button type="submit" class="submit-btn w-full mb-4">Login as Administrator</button>
+                <p class="text-center text-gray-600 text-sm">
+                    Not an administrator? 
+                    <a href="index.html" class="text-blue-900 hover:underline">Return to main login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        async function handleAdminLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/admin/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password
+                    })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('adminToken', data.token);
+                    alert('Login successful!');
+                    window.location.href = 'admindashboards.html'; // Redirect to admin dashboard
+                } else {
+                    alert(data.error || 'Login failed');
+                }
+            } catch (error) {
+                alert('Error during login. Please try again.');
+            }
+        }
+
+        // Add floating label animation
+        document.querySelectorAll('.input-field').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('focused');
+            });
+
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    input.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

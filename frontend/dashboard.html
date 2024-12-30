@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Global Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f1f6f9;
+            color: #2c3e50;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #006d77;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .navbar-brand img {
+            height: 40px; /* Adjust size of the logo */
+            margin-right: 10px; /* Space between image and text */
+        }
+
+        .nav-link {
+            color: #fff !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #ff6f61 !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(120deg, rgba(0, 109, 119, 0.8), rgba(38, 70, 83, 0.8)),
+                url('https://img.freepik.com/premium-photo/top-view-modern-workplace-with-copy-space-office-supplies-dark-grey_67155-4998.jpg?ga=GA1.1.676644000.1730123008&semt=ais_tags_boosted') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            padding: 120px 20px;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            font-weight: 400;
+        }
+
+        .hero-section .btn {
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            font-size: 1.2rem;
+            padding: 14px 35px;
+            font-weight: 600;
+        }
+
+        .hero-section .btn:hover {
+            background-color: #ff8e79;
+            transform: scale(1.05);
+        }
+
+        /* About Section */
+        #about {
+            background-color: #ffffff;
+            color: #2c3e50;
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        #about h2 {
+            color: #006d77;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        #about p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Courses Section */
+        #courses {
+            background-color: #e6f7ff;
+            padding: 60px 15px;
+        }
+
+        #courses h2 {
+            color: #006d77;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s ease-in-out;
+        }
+
+        .card img {
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .card-body {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .card-title {
+            font-weight: bold;
+            color: #006d77;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: #ff6f61;
+            border: none;
+            font-weight: bold;
+            padding: 12px 30px;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff8e79;
+            transform: translateY(-2px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Faculty Section */
+        #faculty {
+            background-color: #ffffff;
+            padding: 60px 15px;
+        }
+
+        #faculty h2 {
+            color: #006d77;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        #faculty img {
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #faculty h5 {
+            color: #006d77;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #006d77;
+            color: #edf6f9;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="kits1.png" alt="KITS Logo">KITS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#courses">Projects</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Welcome to the IT Department Projects Showcase</h1>
+        <p>We are proud to present the creative and innovative projects developed by the students of the IT Department. </p>
+        <a href="#courses" class="btn">View Projects</a>
+    </div>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>In our College our Information Technology students are pushing the boundaries of innovation with their exceptional project work. Explore the diverse range of projects developed by our talented IT students, covering a variety of fields such as software development, web applications, data science, artificial intelligence, and more.</p>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <!-- Courses Section -->
+<section id="courses">
+    <div class="container">
+        <h2 class="text-center">Projects Of Information Technology</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="image1.jpg" alt="2k24 Projects">
+                    <div class="card-body">
+                        <h5 class="card-title">2024 Projects List</h5>
+                        <a href="projects.html?year=2024" class="btn btn-primary">View Projects</a> <!-- Updated link -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="image2.jpg" alt="2k23 Projects">
+                    <div class="card-body">
+                        <h5 class="card-title">2023 Projects List</h5>
+                        <a href="projects.html?year=2023" class="btn btn-primary">View Projects</a> <!-- Updated link -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="images3.jpg" alt="2k22 Projects">
+                    <div class="card-body">
+                        <h5 class="card-title">2022 Projects List</h5>
+                        <a href="projects.html?year=2022" class="btn btn-primary">View Projects</a> <!-- Updated link -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Faculty Section -->
+    <section id="faculty">
+        <div class="container">
+            <h2>Higher Authorities</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="sir.jpg" alt="Secretary" class="img-fluid">
+                    <h5>Sri Koya Shekar Garu</h5>
+                    <p>Secretary,KITS</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="sir1.jpg" alt="Chairman" class="img-fluid">
+                    <h5>Sri K. Subba Rao Garu</h5>
+                    <p>Chairman,KITS</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="sir2.jpg" alt="Director" class="img-fluid">
+                    <h5>Dr. K. Haribabu Garu</h5>
+                    <p>Director,KITS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 KITS. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

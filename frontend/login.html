@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Pages</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Global Style */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f1f6f9;
+        }
+
+        .auth-container {
+            background: linear-gradient(135deg, #006d77 0%, #004c48 100%); /* Replaced colors */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #006d77; /* Primary color */
+            box-shadow: 0 0 0 3px rgba(0, 109, 119, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .input-label {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 0 5px;
+            color: #718096;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .input-field:focus + .input-label,
+        .input-field:not(:placeholder-shown) + .input-label {
+            top: 0;
+            font-size: 0.875rem;
+            color: #006d77; /* Primary color */
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #006d77 0%, #004c48 100%); /* Adjusted button color */
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 109, 119, 0.2);
+        }
+
+        .switch-form {
+            color: #006d77; /* Primary color */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .switch-form:hover {
+            color: #004c48;
+            text-decoration: underline;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container p-4">
+        <!-- Login Form -->
+        <div id="loginForm" class="form-container w-full max-w-md p-8 animate-slide-in">
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Login</h2>
+            <form onsubmit="return handleLogin(event)">
+                <div class="input-group">
+                    <input type="text" id="loginRegisterNo" class="input-field" placeholder=" " required>
+                    <label for="loginRegisterNo" class="input-label">Register Number</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="loginPassword" class="input-field" placeholder=" " required>
+                    <label for="loginPassword" class="input-label">Password</label>
+                </div>
+                <button type="submit" class="submit-btn w-full mb-4">Login</button>
+                <p class="text-center text-gray-600">
+                    Don't have an account? 
+                    <span class="switch-form" onclick="toggleForms()">Register</span>
+                </p>
+            </form>
+        </div>
+
+        <!-- Register Form -->
+        <div id="registerForm" class="form-container w-full max-w-md p-8 animate-slide-in" style="display: none;">
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Register</h2>
+            <form onsubmit="return handleRegister(event)">
+                <div class="input-group">
+                    <input type="email" id="registerEmail" class="input-field" placeholder=" " required>
+                    <label for="registerEmail" class="input-label">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="registerRegisterNo" class="input-field" placeholder=" " required>
+                    <label for="registerRegisterNo" class="input-label">Register Number</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="registerPassword" class="input-field" placeholder=" " required>
+                    <label for="registerPassword" class="input-label">Password</label>
+                </div>
+                <button type="submit" class="submit-btn w-full mb-4">Register</button>
+                <p class="text-center text-gray-600">
+                    Already have an account? 
+                    <span class="switch-form" onclick="toggleForms()">Login</span>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle between Login and Register Forms
+function toggleForms() {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    
+    if (loginForm.style.display === 'none') {
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'block';
+    } else {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+    }
+}
+
+// Handle Login form submission
+async function handleLogin(event) {
+    event.preventDefault();
+    const registerNo = document.getElementById('loginRegisterNo').value;
+    const password = document.getElementById('loginPassword').value;
+
+    const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ registerNo, password }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+        alert('Login Successful');
+        window.location.href = 'dashboard.html';
+        // You can redirect the user or save the user data (e.g., localStorage, sessionStorage)
+    } else {
+        alert(data.message);
+    }
+}
+
+// Handle Register form submission
+async function handleRegister(event) {
+    event.preventDefault();
+    const email = document.getElementById('registerEmail').value;
+    const registerNo = document.getElementById('registerRegisterNo').value;
+    const password = document.getElementById('registerPassword').value;
+
+    const response = await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, registerNo, password }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+        alert('Registration Successful');
+        console.log(data);
+        // Optionally, you can automatically log in the user after successful registration
+        toggleForms(); // Switch to login form after successful registration
+    } else {
+        alert(data.message);
+    }
+}
+
+    </script>
+</body>
+</html>
