@@ -98,7 +98,7 @@
 
     <script>document.addEventListener('DOMContentLoaded', async function() {
         try {
-            const response = await fetch('http://localhost:3000/projects');
+            const response = await fetch('https://kitsprojectlibbackend.makeskilled.com/projects');
             const data = await response.json();
     
             console.log(data);  // Add this line to inspect the response
@@ -124,7 +124,7 @@
                                 <li>${member.name} (Reg No: ${member.registerNo})</li>
                             `).join('')}
                         </ul>
-                        <a href="http://localhost:3000/uploads/${project.projectFile}" class="text-blue-500 hover:underline mt-4 block">View Project File</a>
+                        <a href="https://kitsprojectlibbackend.makeskilled.com//uploads/${project.projectFile}" class="text-blue-500 hover:underline mt-4 block">View Project File</a>
                     `;
 
                     
