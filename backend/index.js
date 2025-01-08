@@ -46,7 +46,7 @@ const upload = multer({
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // MongoDB Connection with proper error handling
-mongoose.connect('mongodb://127.0.0.1:27017/projectlib', {
+mongoose.connect('mongodb://127.0.0.1:17017/KITS-SOC-ProjectLibrary', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
