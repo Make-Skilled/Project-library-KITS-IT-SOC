@@ -58,7 +58,7 @@
         const projectId = urlParams.get('id');
 
         // Fetch the project details from the backend
-        fetch(`http://localhost:3000/project/${projectId}`)
+        fetch(`https://kitsprojectlibbackend.makeskilled.com/project/${projectId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.success && data.project) {
