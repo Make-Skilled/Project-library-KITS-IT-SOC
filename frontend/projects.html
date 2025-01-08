@@ -136,7 +136,7 @@
         yearTitle.textContent = `Projects from ${year}`;
 
         // Fetch the projects from the backend
-        fetch(`http://localhost:3000/projects/${year}`)
+        fetch(`https://kitsprojectlibbackend.makeskilled.com/projects/${year}`)
             .then(response => response.json())
             .then(data => {
                 if (data.success && data.projects.length > 0) {
