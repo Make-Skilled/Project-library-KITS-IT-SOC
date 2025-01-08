@@ -109,6 +109,10 @@ const projectSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 const Project = mongoose.model('Project', projectSchema);
 
+app.get("/", (req, res) => {
+  res.send("API server is running");
+});
+
 // Enhanced project upload endpoint with proper error handling
 app.post('/admin/projects', upload.single('projectFile'), async (req, res) => {
     try {
