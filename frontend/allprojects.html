@@ -138,6 +138,15 @@
             alert('Failed to load projects');
         }
     });
+    <script>
+  function logout() {
+    // You can clear any stored user data here if needed, such as localStorage
+    localStorage.removeItem('user'); // Example if there's a 'user' data in localStorage
+
+    // Redirect to the index.html page
+    window.location.href = 'index.html';
+  }
+</script>
    
     
 
